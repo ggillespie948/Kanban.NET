@@ -20,7 +20,7 @@ namespace IssueTracker
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/muuri").Include(
-                       "~/Scripts/muuri.js"));
+                       "~/Scripts/Muuri.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"
