@@ -48,7 +48,7 @@
 
 <div class="board">
     <div class="board-column todo">
-        <div class="board-column-header">To do</div>
+        <div class="board-column-header">To Do</div>
         <div class="board-column-content">
             <div class="board-item"><div class="board-item-content"><span>Item #</span>1     <span class="badge bg-primary" style="float:right;">GG</span>    </div></div>
             <div class="board-item"><div class="board-item-content"><span>Item #</span>2    <span class="badge bg-primary" style="float:right;">GG</span> <span class="badge bg-primary" style="float:right;">AM</span>   </div></div>
@@ -56,9 +56,10 @@
             <div class="board-item"><div class="board-item-content"><span>Item #</span>4</div></div>
             <div class="board-item"><div class="board-item-content"><span>Item #</span>5</div></div>
         </div>
+        <button type="button" class="btn btn-primary">+</button>
     </div>
     <div class="board-column working">
-        <div class="board-column-header">Working</div>
+        <div class="board-column-header">In-Progress</div>
         <div class="board-column-content">
             <div class="board-item"><div class="board-item-content"><span>Item #</span>6</div></div>
             <div class="board-item"><div class="board-item-content"><span>Item #</span>7</div></div>
@@ -66,9 +67,10 @@
             <div class="board-item"><div class="board-item-content"><span>Item #</span>9</div></div>
             <div class="board-item"><div class="board-item-content"><span>Item #</span>10</div></div>
         </div>
+        <button type="button" class="btn btn-warning">+</button>
     </div>
     <div class="board-column done">
-        <div class="board-column-header">Done</div>
+        <div class="board-column-header">Completed</div>
         <div class="board-column-content">
             <div class="board-item"><div class="board-item-content"><span>Item #</span>11</div></div>
             <div class="board-item"><div class="board-item-content"><span>Item #</span>12</div></div>
@@ -76,11 +78,13 @@
             <div class="board-item"><div class="board-item-content"><span>Item #</span>14</div></div>
             <div class="board-item"><div class="board-item-content"><span>Item #</span>15</div></div>
         </div>
+        <button type="button" class="btn btn-success">+</button>
     </div>
 </div>
+    
 
 <h3> Tasks </h3>
-<button type="button" class="btn btn-success">Add a new task</button>
+<button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Create", "ProjectTasks", new { projectId = Model.Id } )'">Add new task </button>
 <br />
 <br />
 <br />

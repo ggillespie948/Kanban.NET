@@ -42,5 +42,6 @@ namespace IssueTracker.Models
 
         public DbSet<ProjectModels> ProjectModels { get; set; }
 
+        public System.Data.Entity.DbSet<IssueTracker.Models.ProjectTask> ProjectTasks { get; set; }
     }
 }
