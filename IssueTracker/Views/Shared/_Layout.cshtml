@@ -11,6 +11,7 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
+
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,7 +19,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Kanban.NET", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -31,6 +32,12 @@
         </div>
     </div>
 
+    <div class="ProjectFeedScroll">
+        <h3> <a href="#"> Gary Gillespie </a> completed <a> Task #43 </a> in  <a href="#"> ASP Window Project </a></h3>
+        <div class="corner"></div>
+        <div class="corner-right"></div>
+    </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -39,7 +46,7 @@
         </footer>
     </div>
 
-    
+
 
 
 

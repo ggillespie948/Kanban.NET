@@ -90,3 +90,26 @@ select,
     -webkit-animation-play-state: paused;
     animation-play-state: paused;
 }
+
+/* Project Feed Rounded Corners */
+.corner {
+    width: 0;
+    height: 0;
+    border-top: 150px solid #000000;
+    border-bottom: 100px solid transparent;
+    border-right: 150px solid transparent;
+    position: absolute;
+    left: 0;
+    display: inline;
+}
+
+.corner-right {
+    width: 0;
+    height: 0;
+    border-top: 150px solid #000000;
+    border-bottom: 100px solid transparent;
+    border-left: 150px solid transparent;
+    position: absolute;
+    right: 0;
+    display: inline;
+}
