@@ -1,4 +1,5 @@
 ﻿using IssueTracker.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,19 @@ namespace IssueTracker.Controllers
 {
     public class HomeController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
 
+        private ApplicationDbContext db = new ApplicationDbContext();
+
+        [Authorize]
         public ActionResult Index()
         {
+            var userId = User.Identity.GetUserId();
+            var currentAccountId = db.Users.Where(c => c.Id == userId).First().Id;
+            ViewBag.CurrentAccountId = currentAccountId;
             return View();
         }
 
+        [Route("About")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

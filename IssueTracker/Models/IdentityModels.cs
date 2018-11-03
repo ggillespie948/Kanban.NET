@@ -29,5 +29,8 @@ namespace IssueTracker.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<ProjectModels> ProjectModels { get; set; }
+
     }
 }

@@ -12,21 +12,20 @@ namespace IssueTracker.Models
         public int Id { get; set; }
 
         [Required]
+        [Column(TypeName = "varchar")]
+        [MinLength(3)]
+        public string Title { get; set; }
+
+        [Required]
         [Column(TypeName="varchar")]
         [MinLength(10)]
         public string Description { get; set; }
-
-        [Required]
-        public string FirstName { get; set; }
-
-        [Required]
-        public string LastName { get; set; }
 
         public string Name
         {
             get
             {
-                return string.Format("{0}, {1}", this.FirstName, this.LastName);
+                return string.Format("{0} - Kanban Board", this.Title );
             }
         }
 
