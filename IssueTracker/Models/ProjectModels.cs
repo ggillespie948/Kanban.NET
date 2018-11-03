@@ -36,5 +36,6 @@ namespace IssueTracker.Models
 
         [Required]
         public string OwnerUserID { get; set; }
+
     }
 }

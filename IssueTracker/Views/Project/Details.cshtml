@@ -12,33 +12,37 @@
 <h3> A project by @Html.DisplayFor(model => model.OwnerUser.Email) </h3>
 <div>
     <br />
+    <h3> Team Members <button type="button" class="btn btn-success">+</button> </h3>
+    <h5>Gary Gillespie <span class="badge badge-secondary">GG</span> Adam Murray <span class="badge badge-secondary">AM</span></h5>
     <hr />
-    <dl class="dl-horizontal">
+    <!-- <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.OwnerUser.Email)
+            Html.DisplayNameFor(model => model.OwnerUser.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OwnerUser.Email)
+            Html.DisplayFor(model => model.OwnerUser.Email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+           Html.DisplayNameFor(model => model.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            Html.DisplayFor(model => model.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUserId)
+            Html.DisplayNameFor(model => model.ApplicationUserId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ApplicationUserId)
+            Html.DisplayFor(model => model.ApplicationUserId)
         </dd>
 
     </dl>
+        -->
+
 </div>
 
 
@@ -96,10 +100,15 @@
     <tbody>
         <tr>
             <td>1</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 2</td>
-            <td><button type="button" class="btn btn-success btn-sm btn-space">Add</button><button type="button" class="btn btn-warning btn-sm btn-space">Remove</button><button type="button" class="btn btn-danger btn-sm btn-space">Delete</button></td>
+            <td>Intialise Kanban Board</td>
+            <td>TBD</td>
+            <td> All </td>
+            <td>
+                <button type="button" class="btn btn-success btn-sm btn-space">Add</button>
+                <button type="button" class="btn btn-warning btn-sm btn-space">Remove</button>
+                <button type="button" class="btn btn-danger btn-sm btn-space">Delete</button>
+                <button type="button" class="btn btn-primary btn-sm btn-space">Vote Complexity</button>
+            </td>
         </tr>
         <tr>
             <td>2</td>

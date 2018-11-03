@@ -95,7 +95,7 @@ select,
 .corner {
     width: 0;
     height: 0;
-    border-top: 150px solid #000000;
+    border-top: 150px solid #222;
     border-bottom: 100px solid transparent;
     border-right: 150px solid transparent;
     position: absolute;
@@ -106,10 +106,18 @@ select,
 .corner-right {
     width: 0;
     height: 0;
-    border-top: 150px solid #000000;
+    border-top: 150px solid #222;
     border-bottom: 100px solid transparent;
     border-left: 150px solid transparent;
     position: absolute;
     right: 0;
     display: inline;
+}
+
+.btn-space {
+    margin-left: 5px;
+}
+
+.btn-space-m {
+    margin-left: 10px;
 }

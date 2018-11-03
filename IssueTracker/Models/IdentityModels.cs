@@ -16,6 +16,16 @@ namespace IssueTracker.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Name
+        {
+            get
+            {
+                return this.FirstName + " " + this.LastName; 
+            }
+        }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
