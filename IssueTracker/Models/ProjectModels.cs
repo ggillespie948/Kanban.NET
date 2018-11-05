@@ -9,6 +9,11 @@ namespace IssueTracker.Models
 {
     public class ProjectModels
     {
+        public ProjectModels()
+        {
+            ProjectMembers = new HashSet<UserAccount>();
+        }
+
         public int Id { get; set; }
 
         [Required]
@@ -36,6 +41,10 @@ namespace IssueTracker.Models
 
         [Required]
         public string OwnerUserID { get; set; }
+
+        public virtual ICollection<UserAccount> ProjectMembers { get; set; }
+
+        public virtual ICollection<ProjectTask> ProjectTasks { get; set; }
 
     }
 }

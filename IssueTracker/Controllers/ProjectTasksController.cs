@@ -32,7 +32,8 @@ namespace IssueTracker.Controllers
         // GET: ProjectTasks/Create
         public ActionResult Create(int projectId)
         {
-            ViewBag.projectId = projectId;
+            ProjectModels Project = db.ProjectModels.Find(projectId);
+            ViewBag.ProjectModel = Project;
             return View();
         }
 

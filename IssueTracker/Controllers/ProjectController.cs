@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using IssueTracker.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace IssueTracker.Controllers
 {
@@ -53,12 +54,16 @@ namespace IssueTracker.Controllers
         public ActionResult Create([Bind(Include = "Id,Title,Description,ApplicationUserId,OwnerUserID")] ProjectModels projectModels)
         {
             var userId = User.Identity.GetUserId();
+            //ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             projectModels.ApplicationUserId = userId;
             projectModels.OwnerUserID = userId;
-            projectModels.OwnerUser = db.Users.Find(userId);
-            
+            projectModels.OwnerUser = db.Users.Where(u => u.Id == userId).FirstOrDefault();
+            projectModels.ProjectMembers.Add(db.UserAccounts.Where(u => u.ApplicationUserId == userId).FirstOrDefault());
+
            db.ProjectModels.Add(projectModels);
            db.SaveChanges();
+           
+
            return RedirectToAction("Index");
         }
 

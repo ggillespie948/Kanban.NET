@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -16,16 +17,7 @@ namespace IssueTracker.Models
             // Add custom user claims here
             return userIdentity;
         }
-
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Name
-        {
-            get
-            {
-                return this.FirstName + " " + this.LastName; 
-            }
-        }
+        
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -40,8 +32,18 @@ namespace IssueTracker.Models
             return new ApplicationDbContext();
         }
 
+        public DbSet<UserAccount> UserAccounts { get; set; }
+
         public DbSet<ProjectModels> ProjectModels { get; set; }
 
-        public System.Data.Entity.DbSet<IssueTracker.Models.ProjectTask> ProjectTasks { get; set; }
+        public DbSet<ProjectTask> ProjectTasks { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserAccount>().Property(t => t.FirstName).IsRequired();
+            modelBuilder.Entity<UserAccount>().Property(t => t.LastName).IsRequired();
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

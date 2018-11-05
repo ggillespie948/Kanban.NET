@@ -9,6 +9,10 @@ namespace IssueTracker.Models
 {
     public class ProjectTask
     {
+        public ProjectTask()
+        {
+            Members = new HashSet<ApplicationUser>();
+        }
         public int Id { get; set; }
 
         [Required]
@@ -21,6 +25,8 @@ namespace IssueTracker.Models
         [MinLength(3)]
         [MaxLength(50)]
         public string Name { get; set; }
+
+        public int Complexity { get; set;  }
 
         [Required]
         [MinLength(3)]
