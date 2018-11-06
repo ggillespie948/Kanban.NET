@@ -207,31 +207,7 @@
     <Compile Include="Migrations\201811030000006_InitialCreate.Designer.cs">
       <DependentUpon>201811030000006_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811051311440_UpdatedAccounts.cs" />
-    <Compile Include="Migrations\201811051311440_UpdatedAccounts.Designer.cs">
-      <DependentUpon>201811051311440_UpdatedAccounts.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201811051348293_05\11Miogration.cs" />
-    <Compile Include="Migrations\201811051348546_UpdatedModel.cs" />
-    <Compile Include="Migrations\201811051348546_UpdatedModel.Designer.cs">
-      <DependentUpon>201811051348546_UpdatedModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811051536006_UpdatedModel1.cs" />
-    <Compile Include="Migrations\201811051536006_UpdatedModel1.Designer.cs">
-      <DependentUpon>201811051536006_UpdatedModel1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811051637081_UpdatedModelUser1.cs" />
-    <Compile Include="Migrations\201811051637081_UpdatedModelUser1.Designer.cs">
-      <DependentUpon>201811051637081_UpdatedModelUser1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811051656317_UpdatedModelUser3.cs" />
-    <Compile Include="Migrations\201811051656317_UpdatedModelUser3.Designer.cs">
-      <DependentUpon>201811051656317_UpdatedModelUser3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811052152584_UpdatedModelUser5.cs" />
-    <Compile Include="Migrations\201811052152584_UpdatedModelUser5.Designer.cs">
-      <DependentUpon>201811052152584_UpdatedModelUser5.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201811052237453_UpdatedModelUserT.cs" />
     <Compile Include="Migrations\201811052237453_UpdatedModelUserT.Designer.cs">
       <DependentUpon>201811052237453_UpdatedModelUserT.cs</DependentUpon>
@@ -557,6 +533,7 @@
     <Content Include="Views\ProjectTasks\Details.cshtml" />
     <Content Include="Views\ProjectTasks\Edit.cshtml" />
     <Content Include="Views\ProjectTasks\Index.cshtml" />
+    <Content Include="Views\Project\ListAllAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -577,24 +554,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811030000006_InitialCreate.resx">
       <DependentUpon>201811030000006_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811051311440_UpdatedAccounts.resx">
-      <DependentUpon>201811051311440_UpdatedAccounts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811051348546_UpdatedModel.resx">
-      <DependentUpon>201811051348546_UpdatedModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811051536006_UpdatedModel1.resx">
-      <DependentUpon>201811051536006_UpdatedModel1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811051637081_UpdatedModelUser1.resx">
-      <DependentUpon>201811051637081_UpdatedModelUser1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811051656317_UpdatedModelUser3.resx">
-      <DependentUpon>201811051656317_UpdatedModelUser3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811052152584_UpdatedModelUser5.resx">
-      <DependentUpon>201811052152584_UpdatedModelUser5.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811052237453_UpdatedModelUserT.resx">
       <DependentUpon>201811052237453_UpdatedModelUserT.cs</DependentUpon>

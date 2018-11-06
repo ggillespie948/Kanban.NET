@@ -19,10 +19,30 @@ namespace IssueTracker.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ProjectModels
+
         public ActionResult Index()
         {
             var projectModels = db.ProjectModels.Include(p => p.OwnerUser);
             return View(projectModels.ToList());
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult ListAllAdmin()
+        {
+            return View(db.ProjectModels.ToList());
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult DetailsForAdmin(int id)
+        {
+            ProjectModels projectModels = db.ProjectModels.Find(id);
+            if (projectModels == null)
+            {
+                return HttpNotFound();
+            }
+            
+            //Project Member Authenticated, serving View
+            return View("Details", projectModels);
         }
 
         // GET: ProjectModels/Details/5
@@ -41,6 +61,7 @@ namespace IssueTracker.Controllers
             //Authorise this method to ensure the logged in user is either an owner or at least a member fot he current project
             var userId = User.Identity.GetUserId();
             bool isProjectMember = false;
+
             if(projectModels.OwnerUserID != userId)
             {
                 //user is not the project owner - search related team members
