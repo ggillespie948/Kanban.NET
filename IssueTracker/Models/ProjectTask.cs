@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.Design;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IssueTracker.Models
 {
@@ -13,13 +14,15 @@ namespace IssueTracker.Models
         {
             Members = new HashSet<ApplicationUser>();
         }
+
+        [Key]
         public int Id { get; set; }
 
         [Required]
-        public int ProjectID;
+        public string ProjectID { get; set; }
 
         [Required]
-        public int CreatorId { get; set; }
+        public string CreatorId { get; set; }
 
         [Required]
         [MinLength(3)]

@@ -42,6 +42,7 @@ namespace IssueTracker.Models
         {
             modelBuilder.Entity<UserAccount>().Property(t => t.FirstName).IsRequired();
             modelBuilder.Entity<UserAccount>().Property(t => t.LastName).IsRequired();
+            modelBuilder.Entity<ProjectTask>().Property(t => t.ProjectID).IsRequired();
             base.OnModelCreating(modelBuilder);
         }
 

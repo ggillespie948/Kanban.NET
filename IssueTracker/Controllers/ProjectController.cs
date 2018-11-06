@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace IssueTracker.Controllers
 {
+    [Authorize]
     public class ProjectController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -36,6 +37,28 @@ namespace IssueTracker.Controllers
             {
                 return HttpNotFound();
             }
+
+            //Authorise this method to ensure the logged in user is either an owner or at least a member fot he current project
+            var userId = User.Identity.GetUserId();
+            bool isProjectMember = false;
+            if(projectModels.OwnerUserID != userId)
+            {
+                //user is not the project owner - search related team members
+                foreach(UserAccount userAcc in projectModels.ProjectMembers)
+                {
+                    if(userAcc.ApplicationUserId == userId)
+                    {
+                        isProjectMember = true;
+                        break;
+                    }
+                }
+                if(!isProjectMember)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+            }
+
+            //Project Member Authenticated, serving View
             return View(projectModels);
         }
 

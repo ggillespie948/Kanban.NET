@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IssueTracker.Models;
+using Microsoft.AspNet.Identity;
 
 namespace IssueTracker.Controllers
 {
@@ -34,6 +35,7 @@ namespace IssueTracker.Controllers
         {
             ProjectModels Project = db.ProjectModels.Find(projectId);
             ViewBag.ProjectModel = Project;
+            ViewBag.UserId = User.Identity.GetUserId();
             return View();
         }
 
@@ -42,17 +44,15 @@ namespace IssueTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CreatorId,Name,Description")] ProjectTask projectTask)
+        public ActionResult Create([Bind(Include = "Id,CreatorId,ProjectID,Name,Description")] ProjectTask projectTask, string ProjectID)
         {
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            projectTask.CreatorId = User.Identity.GetUserId();
+            projectTask.ProjectID = ProjectID;
 
-            if (ModelState.IsValid)
-            {
-                db.ProjectTasks.Add(projectTask);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(projectTask);
+            db.ProjectTasks.Add(projectTask);
+            db.SaveChanges();
+            return RedirectToAction("Index","Project");
         }
 
         // GET: ProjectTasks/Edit/5
