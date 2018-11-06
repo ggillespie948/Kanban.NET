@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using IssueTracker.Models;
+using IssueTracker.Services;
 
 namespace IssueTracker.Controllers
 {
@@ -164,11 +165,8 @@ namespace IssueTracker.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    //Create new User Accont instance and link to ApplictionUser
-                    var userAccount = new UserAccount { FirstName=model.FirstName, LastName=model.LastName, ApplicationUserId=user.Id  };
-                    db.UserAccounts.Add(userAccount);
-                    db.SaveChanges();
-
+                    var service = new UserAccountService(HttpContext.GetOwinContext().Get<ApplicationDbContext>());
+                    service.CreateUserAccount(model.FirstName, model.LastName, user.Id);
 
                     return RedirectToAction("Index", "Home");
                 }
