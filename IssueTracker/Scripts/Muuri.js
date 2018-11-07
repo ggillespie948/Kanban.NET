@@ -43,6 +43,14 @@ itemContainers.forEach(function (container) {
     // be different size.
 
       console.log(" releaseeeeeeeee me");
+      var colo = item.getElement();
+      var str = colo.innerHTML;
+      console.log(str);
+      var newStr = str.slice(0, -10);    // += '<span class="badge bg-primary" style="float:right;">GG</span>'; 
+      newStr += '<span class="badge bg-primary" style="float:right;">GG</span> </div>';
+      console.log("new Str: " + newStr);
+      colo.innerHTML = newStr;
+
 
     columnGrids.forEach(function (grid) {
       grid.refreshItems();
