@@ -15,42 +15,14 @@
     <h3> Team Members <button type="button" class="btn btn-success">+</button> </h3>
     <h5>Gary Gillespie <span class="badge badge-secondary">GG</span> Adam Murray <span class="badge badge-secondary">AM</span></h5>
     <hr />
-    <!-- <dl class="dl-horizontal">
-        <dt>
-            Html.DisplayNameFor(model => model.OwnerUser.Email)
-        </dt>
-
-        <dd>
-            Html.DisplayFor(model => model.OwnerUser.Email)
-        </dd>
-
-        <dt>
-           Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            Html.DisplayNameFor(model => model.ApplicationUserId)
-        </dt>
-
-        <dd>
-            Html.DisplayFor(model => model.ApplicationUserId)
-        </dd>
-
-    </dl>
-        -->
-
 </div>
 
-
+<!-- Kanban Board Section, this javascript object is an MVVM component which is linked to the datatables object below  -->
 <div class="board">
     <div class="board-column todo">
         <div class="board-column-header">To Do</div>
         <div class="board-column-content">
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>1     <span class="badge bg-primary" style="float:right;">GG</span>    </div></div>
+            <div class="board-item"><div class="board-item-content"> <a href="#"> Item # 1 </a>  <span class="badge bg-primary" style="float:right;">GG</span>    </div></div>
             <div class="board-item"><div class="board-item-content"><span>Item #</span>2    <span class="badge bg-primary" style="float:right;">GG</span> <span class="badge bg-primary" style="float:right;">AM</span>   </div></div>
             <div class="board-item"><div class="board-item-content"><span>Item #</span>3</div></div>
             <div class="board-item"><div class="board-item-content"><span>Item #</span>4</div></div>
@@ -81,20 +53,16 @@
         <button type="button" class="btn btn-success">+</button>
     </div>
 </div>
-
-
+<!-- -->
+<!-- Create a new Task seciton -->
 <h3> Tasks </h3>
+<!-- old action link to projectTasks/Create view, below is the new option to post the new project task via jquery Ajax -->
 <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Create", "ProjectTasks", new { projectId = Model.Id } )'">Add new task </button>
 <br />
 <br />
-<br />
-
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Open modal for </button>
-
-
-
-
-<!-- Form for posting new task via ajax -->
+<!--  -->
+<!-- Dropdwon Modal for posting new task via ajax       !!!!THIS NEEDS TO BE A PARTIAL VIEW!!!!!      -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -105,16 +73,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Title:</label>
-                        <input type="text" class="form-control" id="recipient-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">Description:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
-                    </div>
-                </form>
+
+                <!-- Render NewProjectTask partial View -->
+                @Html.Partial("_NewProjectTask", new IssueTracker.Models.ProjectTask(), new ViewDataDictionary { { "ProjectId", Model.Id }, { "ProjectMembers", Model.ProjectMembers } })
+
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -123,61 +86,30 @@
         </div>
     </div>
 </div>
-
+<!-- -->
 
 <h4> Project Backlog </h4>
-<table id="table_id" class="display">
+<table id="project_backlog_table" class="display">
     <thead>
         <tr>
-            <th>Task #</th>
+            <th>Task Id</th>
             <th>Name</th>
+            <th>Description</th>
             <th>Complexity</th>
-            <th>Tags</th>
-            <th> Action</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>Intialise Kanban Board</td>
-            <td>TBD</td>
-            <td> All </td>
-            <td>
-                <button type="button" class="btn btn-success btn-sm btn-space">Add</button>
-                <button type="button" class="btn btn-warning btn-sm btn-space">Remove</button>
-                <button type="button" class="btn btn-danger btn-sm btn-space">Delete</button>
-                <button type="button" class="btn btn-primary btn-sm btn-space">Vote Complexity</button>
-            </td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Row 2 Data 2</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 2</td>
-            <td><button type="button" class="btn btn-success btn-sm">Add</button></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Row 2 Data 2</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 2</td>
-            <td><button type="button" class="btn btn-success btn-sm">Add</button></td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Row 2 Data 2</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 2</td>
-            <td><button type="button" class="btn btn-success btn-sm">Add</button></td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Row 2 Data 2</td>
-            <td>Row 1 Data 2</td>
-            <td>Row 1 Data 2</td>
-            <td><button type="button" class="btn btn-success btn-sm">Add</button></td>
-        </tr>
+
+         <td>
+        <button type="button" class="btn btn-success btn-sm btn-space">Add</button>
+        <button type="button" class="btn btn-warning btn-sm btn-space">Remove</button>
+        <button type="button" class="btn btn-danger btn-sm btn-space">Delete</button>
+        <button type="button" class="btn btn-primary btn-sm btn-space">Vote Complexity</button>
+        </td> 
+
     </tbody>
+            
 </table>
 <h4> User Contributions </h4>
 <br />
@@ -192,10 +124,28 @@
     @Scripts.Render("~/bundles/muuri")  <!-- Render Muuri JS File initializer -->
 
     <script>
+        //Init DataTables with Product Backlog
         $(document).ready(function () {
-            $('#table_id').DataTable();
+            $('#project_backlog_table').DataTable({
+                "ajax": {
+                    "url": "/Project/LoadProjectBacklog",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "Id", "autoWidth": true },
+                    { "data": "Name", "autoWidth": true },
+                    { "data": "Description", "autoWidth": true },
+                    { "data": "Complexity", "autoWidth": true },
+                    {
+                        "defaultContent" : "<button type=\"button\" class=\"btn btn-success btn-sm btn-space\">Add</button><button type=\"button\" class= \"btn btn-warning btn-sm btn-space\" > Remove</button><button type=\"button\" class=\"btn btn-danger btn-sm btn-space\">Delete</button><button type=\"button\" class=\"btn btn-primary btn-sm btn-space\">Vote Complexity</button>" 
+                    }
+                ]
+            });
         });
 
+
+        //Init image modal for rapidly adding project tasks
         $('#exampleModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -207,4 +157,8 @@
         })
     </script>
 
+}
+
+@section scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 }

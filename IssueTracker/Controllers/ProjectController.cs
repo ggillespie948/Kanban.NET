@@ -18,7 +18,7 @@ namespace IssueTracker.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: ProjectModels
+        // GET: Projects
 
         public ActionResult Index()
         {
@@ -168,6 +168,20 @@ namespace IssueTracker.Controllers
             db.ProjectModels.Remove(projectModels);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult LoadProjectBacklog(string projectId)
+        {
+
+            //TO DO: check if the user making the request is a member of the project ebing requested
+            if (projectId == null)
+                projectId = "2024";
+            if(projectId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var data = db.ProjectTasks.Where(pt => pt.ProjectID == projectId);
+            return Json(new { data }, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

@@ -21,9 +21,6 @@
     <h1> @ViewBag.UserId </h1>
     <h1> @ViewBag.ProjectModel.Id </h1>
 
-
- 
-
     <input type="hidden" data-val="true"   data-val-required="The Project ID field is required." id="ProjectID" name="ProjectID" value="@ViewBag.ProjectModel.Id" />
 
     <div class="form-group">
@@ -54,6 +51,7 @@
                 @user.Name
             </option>
         }
+
     </select>
     <br />
     <h4> Add Tags </h4>
