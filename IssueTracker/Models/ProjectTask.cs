@@ -35,10 +35,13 @@ namespace IssueTracker.Models
         [MinLength(3)]
         public string Description { get; set; }
 
+        public int BoardId { get; set; } 
+
         public ICollection<string> Comments { get; set; }
 
         public ICollection<ApplicationUser> Members { get; set; }
 
+        
 
 
         

@@ -1,6 +1,6 @@
 ﻿
 
-
+//GEt a reference to all Muuri container objects
 var itemContainers = [].slice.call(document.querySelectorAll('.board-column-content'));
 var columnGrids = [];
 var boardGrid;

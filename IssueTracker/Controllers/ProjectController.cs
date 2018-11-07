@@ -170,13 +170,33 @@ namespace IssueTracker.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// This action result returns a json object containing call of the project tasks related to a project
+        ///  formatted specifically for the datatables element at the bottom of the project details view
+        /// </summary>
+        /// <param name="projectId"></param>
+        /// <returns></returns>
         public ActionResult LoadProjectBacklog(string projectId)
         {
 
             //TO DO: check if the user making the request is a member of the project ebing requested
-            if (projectId == null)
-                projectId = "2024";
             if(projectId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var data = db.ProjectTasks.Where(pt => pt.ProjectID == projectId);
+            return Json(new { data }, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// This action result returns a json object containing call of the project tasks related to a project
+        ///  formatted specifically for the datatables element at the bottom of the project details view
+        /// </summary>
+        public ActionResult LoadProjectTasks(string projectId)
+        {
+
+            //TO DO: check if the user making the request is a member of the project ebing requested
+            if (projectId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

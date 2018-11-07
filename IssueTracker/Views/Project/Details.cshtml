@@ -22,30 +22,27 @@
     <div class="board-column todo">
         <div class="board-column-header">To Do</div>
         <div class="board-column-content">
-            <div class="board-item"><div class="board-item-content"> <a href="#"> Item # 1 </a>  <span class="badge bg-primary" style="float:right;">GG</span>    </div></div>
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>2    <span class="badge bg-primary" style="float:right;">GG</span> <span class="badge bg-primary" style="float:right;">AM</span>   </div></div>
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>3</div></div>
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>4</div></div>
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>5</div></div>
+            <!-- Column 1 Project Tasks -->
+
+
         </div>
         <button type="button" class="btn btn-primary">+</button>
     </div>
     <div class="board-column working">
         <div class="board-column-header">In-Progress</div>
         <div class="board-column-content">
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>6</div></div>
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>7</div></div>
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>8</div></div>
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>9</div></div>
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>10</div></div>
+            <!-- Column 2 Project Tasks -->
+            <div class="board-item"><div class="board-item-content"> <a href="#"> Item # 1 </a>  <span class="badge bg-primary" style="float:right;">GG</span>    </div></div>
+
+
         </div>
         <button type="button" class="btn btn-warning">+</button>
     </div>
     <div class="board-column done">
         <div class="board-column-header">Completed</div>
         <div class="board-column-content">
+            <!-- Colum 3 Project Tasks -->
             <div class="board-item"><div class="board-item-content"><span>Item #</span>11</div></div>
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>12</div></div>
             <div class="board-item"><div class="board-item-content"><span>Item #</span>13</div></div>
             <div class="board-item"><div class="board-item-content"><span>Item #</span>14</div></div>
             <div class="board-item"><div class="board-item-content"><span>Item #</span>15</div></div>
@@ -99,17 +96,6 @@
             <th>Action</th>
         </tr>
     </thead>
-    <tbody>
-
-         <td>
-        <button type="button" class="btn btn-success btn-sm btn-space">Add</button>
-        <button type="button" class="btn btn-warning btn-sm btn-space">Remove</button>
-        <button type="button" class="btn btn-danger btn-sm btn-space">Delete</button>
-        <button type="button" class="btn btn-primary btn-sm btn-space">Vote Complexity</button>
-        </td> 
-
-    </tbody>
-            
 </table>
 <h4> User Contributions </h4>
 <br />
@@ -124,13 +110,18 @@
     @Scripts.Render("~/bundles/muuri")  <!-- Render Muuri JS File initializer -->
 
     <script>
-        //Init DataTables with Product Backlog
         $(document).ready(function () {
+
+            var projectId = @Model.Id
+
+             
+           //Init DataTables with Product Backlog
             $('#project_backlog_table').DataTable({
                 "ajax": {
                     "url": "/Project/LoadProjectBacklog",
                     "type": "GET",
-                    "datatype": "json"
+                    "datatype": "json",
+                    "data" : { "projectId": projectId }
                 },
                 "columns": [
                     { "data": "Id", "autoWidth": true },
@@ -141,7 +132,59 @@
                         "defaultContent" : "<button type=\"button\" class=\"btn btn-success btn-sm btn-space\">Add</button><button type=\"button\" class= \"btn btn-warning btn-sm btn-space\" > Remove</button><button type=\"button\" class=\"btn btn-danger btn-sm btn-space\">Delete</button><button type=\"button\" class=\"btn btn-primary btn-sm btn-space\">Vote Complexity</button>" 
                     }
                 ]
+                });
+
+            //Init Muuri Grid with Task Objects
+            $.ajax({
+                url: "/Project/LoadProjectTasks",
+                type: "GET",
+                cache: false,
+                data: { "projectId": projectId  },
+                success: function (responsedata) {
+
+                    //Get nested payload from json object
+                    var payload = [];
+                    var i = 0;
+                    $.each(responsedata, function (key, value) {
+                        console.log(key, value);
+                        payload.push(value);
+                    });
+
+                    for (i = 0; i < payload[0].length; i++) {
+                        var data = payload[0][i];
+                        if (data.hasOwnProperty('Name')) {
+                            var val = data['Name'];
+                            var valkey = data['Id'];
+
+                            console.log("pre-val-name : " + val);
+                            console.log("pre-val-Id : " + valkey);
+
+                            GenerateKanbanEntry(val, valkey, 0);
+                        }
+                    }
+                }
             });
+
+
+            //Muuri Helper Funcitons
+            function GenerateKanbanEntry(Name, Id, BoardId) {
+
+                var item = document.createElement('div');
+                var inner = document.createElement('div');
+                item.className = 'board-item';
+                inner.className = 'board-item-content';
+                inner.id = Id;
+                inner.innerHTML = '<a href="ProjectTask/Details/'+ Id + '">' + Name + '</a>';
+                item.appendChild(inner);
+
+                var counter = 0
+                columnGrids.forEach(function (grid) {
+                    if (counter == 0)
+                        grid.add(item);
+                    counter++;
+                });
+            }
+
         });
 
 
@@ -155,6 +198,9 @@
             modal.find('.modal-title').text('New message to ' + recipient)
             modal.find('.modal-body input').val(recipient)
         })
+
+
+        
     </script>
 
 }
