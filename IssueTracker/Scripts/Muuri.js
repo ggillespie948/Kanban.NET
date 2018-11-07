@@ -41,6 +41,9 @@ itemContainers.forEach(function (container) {
     // Just in case, let's refresh the dimensions of all items
     // in case dragging the item caused some other items to
     // be different size.
+
+      console.log(" releaseeeeeeeee me");
+
     columnGrids.forEach(function (grid) {
       grid.refreshItems();
     });

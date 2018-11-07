@@ -144,9 +144,7 @@
 
                     //Get nested payload from json object
                     var payload = [];
-                    var i = 0;
                     $.each(responsedata, function (key, value) {
-                        console.log(key, value);
                         payload.push(value);
                     });
 
@@ -156,8 +154,8 @@
                             var val = data['Name'];
                             var valkey = data['Id'];
 
-                            console.log("pre-val-name : " + val);
-                            console.log("pre-val-Id : " + valkey);
+                            //console.log("pre-val-name : " + val);
+                            //console.log("pre-val-Id : " + valkey);
 
                             GenerateKanbanEntry(val, valkey, 0);
                         }
