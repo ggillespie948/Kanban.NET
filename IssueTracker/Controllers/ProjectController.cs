@@ -60,6 +60,7 @@ namespace IssueTracker.Controllers
 
             //Authorise this method to ensure the logged in user is either an owner or at least a member fot he current project
             var userId = User.Identity.GetUserId();
+            ViewBag.UserId = userId;
             bool isProjectMember = false;
 
             if(projectModels.OwnerUserID != userId)

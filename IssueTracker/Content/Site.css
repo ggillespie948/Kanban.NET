@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -97,8 +98,6 @@ select,
 
 /* Project Feed Rounded Corners */
 .corner {
-    width: 0;
-    height: 0;
     border-top: 150px solid #222;
     border-bottom: 100px solid transparent;
     border-right: 150px solid transparent;
@@ -108,8 +107,6 @@ select,
 }
 
 .corner-right {
-    width: 0;
-    height: 0;
     border-top: 150px solid #222;
     border-bottom: 100px solid transparent;
     border-left: 150px solid transparent;

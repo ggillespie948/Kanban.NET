@@ -58,17 +58,16 @@
 <!-- Create a new Task seciton -->
 <h3> Tasks </h3>
 <!-- old action link to projectTasks/Create view, below is the new option to post the new project task via jquery Ajax -->
-<button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Create", "ProjectTasks", new { projectId = Model.Id } )'">Add new task </button>
+<!-- <button type="button" class="btn btn-success" onclick="location.href=' (AT)Url.Action("Create", "ProjectTasks", new { projectId = Model.Id } )'">Add new task </button> -->
 <br />
 <br />
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Open modal for </button>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"> Add New Task </button>
 <!--  -->
 <!-- Dropdwon Modal for posting new task via ajax       !!!!THIS NEEDS TO BE A PARTIAL VIEW!!!!!      -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Project Task</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -76,13 +75,13 @@
             <div class="modal-body">
 
                 <!-- Render NewProjectTask partial View -->
-                @Html.Partial("_NewProjectTask", new IssueTracker.Models.ProjectTask(), new ViewDataDictionary { { "ProjectId", Model.Id }, { "ProjectMembers", Model.ProjectMembers } })
+                @Html.Partial("_NewProjectTask", new IssueTracker.Models.ProjectTask(), new ViewDataDictionary { { "ProjectId", Model.Id }, { "ProjectMembers", Model.ProjectMembers }, { "CreatorId", ViewBag.UserId } })
 
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Add Task</button>
+                <button type="button" class="btn btn-success" id="projectTaskBtnSubmit">Add Task</button>
             </div>
         </div>
     </div>
@@ -121,9 +120,8 @@
 
     <script>
         $(document).ready(function () {
-
+            ///     INITALISE BACKLOG, KANBAN BOARD    ///
             var projectId = @Model.Id
-
              
            //Init DataTables with Product Backlog
             $('#project_backlog_table').DataTable({
@@ -168,32 +166,35 @@
                             //console.log("pre-val-Id : " + valkey);
 
                             GenerateKanbanEntry(val, valkey, 0);
+                            
+
+
                         }
                     }
                 }
             });
-
-
-            //Muuri Helper Funcitons
-            function GenerateKanbanEntry(Name, Id, BoardId) {
-
-                var item = document.createElement('div');
-                var inner = document.createElement('div');
-                item.className = 'board-item';
-                inner.className = 'board-item-content';
-                inner.id = Id;
-                inner.innerHTML = '<a href="#">' + Name + '</a>'; //insertID here
-                item.appendChild(inner);
-
-                var counter = 0
-                columnGrids.forEach(function (grid) {
-                    if (counter == 0)
-                        grid.add(item);
-                    counter++;
-                });
-            }
+            
 
         });
+
+        //Muuri Helper Funcitons
+        function GenerateKanbanEntry(Name, Id, BoardId) {
+
+            var item = document.createElement('div');
+            var inner = document.createElement('div');
+            item.className = 'board-item';
+            inner.className = 'board-item-content';
+            inner.id = Id;
+            inner.innerHTML = '<a href="#">' + Name + '</a>'; //insertID here
+            item.appendChild(inner);
+
+            var counter = 0
+            columnGrids.forEach(function (grid) {
+                if (counter == 0)
+                    grid.add(item);
+                counter++;
+            });
+        }
 
 
         //Init image modal for rapidly adding project tasks
@@ -205,6 +206,39 @@
             var modal = $(this)
             modal.find('.modal-title').text('New message to ' + recipient)
             modal.find('.modal-body input').val(recipient)
+        })
+
+        //Handle project task modal form submision
+        $('#projectTaskBtnSubmit').click(function () {
+
+            $('#ProjectID').val(@Model.Id); // dynamically assign propject id as partial view viewdata asignment not being detected by jquery
+            alert($('#projectTaskModalForm').serialize());
+            $('#loaderDiv').show();
+
+            var projectTaskFormData = $('#projectTaskModalForm').serialize();
+
+            $.ajax({
+                type: "POST",
+                url: "/ProjectTasks/Create",
+                data: projectTaskFormData,
+                success: function () {
+                   
+
+                    GenerateKanbanEntry($('#Name').val(), 9, 0);
+
+                    var tbl = $('#project_backlog_table').DataTable();
+                    tbl.row.add([
+                        99,
+                        $('#Name').val(),
+                        $('#Description').val(),
+                        $('#Complexity').val(),
+                    ]).draw(false);
+
+                    $('#loaderDiv').hide();
+                    $('#exampleModal').modal("hide");
+
+                }
+            })
         })
 
 

@@ -43,12 +43,10 @@ namespace IssueTracker.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,CreatorId,ProjectID,Name,Description")] ProjectTask projectTask, string ProjectID)
         {
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             projectTask.CreatorId = User.Identity.GetUserId();
-            projectTask.ProjectID = ProjectID;
 
             db.ProjectTasks.Add(projectTask);
             db.SaveChanges();
