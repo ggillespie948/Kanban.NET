@@ -16,9 +16,9 @@ namespace IssueTracker.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var userId = User.Identity.GetUserId();
-            var currentAccountId = db.Users.Where(c => c.Id == userId).First().Id;
-            ViewBag.CurrentAccountId = currentAccountId;
+            //var userId = User.Identity.GetUserId();
+            //var currentAccountId = db.Users.Where(c => c.Id == userId).First().Id;
+            //ViewBag.CurrentAccountId = currentAccountId;
             return View();
         }
 

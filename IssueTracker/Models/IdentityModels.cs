@@ -20,31 +20,5 @@ namespace IssueTracker.Models
         
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
-
-        public DbSet<UserAccount> UserAccounts { get; set; }
-
-        public DbSet<ProjectModels> ProjectModels { get; set; }
-
-        public DbSet<ProjectTask> ProjectTasks { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<UserAccount>().Property(t => t.FirstName).IsRequired();
-            modelBuilder.Entity<UserAccount>().Property(t => t.LastName).IsRequired();
-            modelBuilder.Entity<ProjectTask>().Property(t => t.ProjectID).IsRequired();
-            base.OnModelCreating(modelBuilder);
-        }
-
-    }
+    
 }

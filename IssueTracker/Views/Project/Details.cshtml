@@ -60,8 +60,8 @@
 <!-- old action link to projectTasks/Create view, below is the new option to post the new project task via jquery Ajax -->
 <!-- <button type="button" class="btn btn-success" onclick="location.href=' (AT)Url.Action("Create", "ProjectTasks", new { projectId = Model.Id } )'">Add new task </button> -->
 <br />
-<br />
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"> Add New Task </button>
+<br />
 <!--  -->
 <!-- Dropdwon Modal for posting new task via ajax       !!!!THIS NEEDS TO BE A PARTIAL VIEW!!!!!      -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -76,8 +76,7 @@
 
                 <!-- Render NewProjectTask partial View -->
                 @Html.Partial("_NewProjectTask", new IssueTracker.Models.ProjectTask(), new ViewDataDictionary { { "ProjectId", Model.Id }, { "ProjectMembers", Model.ProjectMembers }, { "CreatorId", ViewBag.UserId } })
-
-
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

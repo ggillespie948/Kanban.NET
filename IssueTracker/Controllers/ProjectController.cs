@@ -16,7 +16,17 @@ namespace IssueTracker.Controllers
     [Authorize]
     public class ProjectController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IApplicationDbContext db;
+
+        public ProjectController ()
+        {
+            db = new ApplicationDbContext();
+        }
+
+        public ProjectController(IApplicationDbContext dbContext)
+        {
+            db = new ApplicationDbContext();
+        }
 
         // GET: Projects
 
