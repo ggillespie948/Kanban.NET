@@ -11,7 +11,17 @@ namespace IssueTracker.Controllers
     public class HomeController : Controller
     {
 
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IApplicationDbContext db;
+
+        public HomeController()
+        {
+            db = new ApplicationDbContext();
+        }
+
+        public HomeController(IApplicationDbContext dbContext)
+        {
+            db = new ApplicationDbContext();
+        }
 
         [Authorize]
         public ActionResult Index()

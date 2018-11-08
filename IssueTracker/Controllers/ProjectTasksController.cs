@@ -13,7 +13,17 @@ namespace IssueTracker.Controllers
 {
     public class ProjectTasksController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IApplicationDbContext db;
+
+        public ProjectTasksController()
+        {
+            db = new ApplicationDbContext();
+        }
+
+        public ProjectTasksController(IApplicationDbContext dbContext)
+        {
+            db = new ApplicationDbContext();
+        }
 
         // GET: ProjectTasks/Details/5
         public ActionResult Details(int? id)
