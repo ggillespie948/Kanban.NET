@@ -30,8 +30,12 @@ select,
     height: 50px;
     overflow: hidden;
     position: relative;
-    background-color: rebeccapurple;
+    background-color: #1c679d;
     color:whitesmoke;
+}
+
+.ProjectFeedScroll a {
+    color: #43e343;
 }
 
     .ProjectFeedScroll h3 {
@@ -120,4 +124,17 @@ select,
 
 .btn-space-m {
     margin-left: 10px;
+}
+
+
+.project-header-container {
+    background-color: steelblue;
+    color: whitesmoke;
+    font-style: oblique;
+}
+
+.project-team-container {
+    background-color: steelblue;
+    color: whitesmoke;
+    font-style: oblique;
 }

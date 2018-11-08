@@ -4,18 +4,13 @@
     ViewBag.Title = "Details";
 }
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
-<h2> @Html.DisplayFor(model => model.Title) </h2>
-<h3> A project by @Html.DisplayFor(model => model.OwnerUser.Email) </h3>
-<div>
-    <br />
-    <h3> Team Members <button type="button" class="btn btn-success">+</button> </h3>
-    <h5>Gary Gillespie <span class="badge badge-secondary">GG</span> Adam Murray <span class="badge badge-secondary">AM</span></h5>
-    <hr />
+
+<!-- Project Title, owner declaration  -->
+<div class="project-header-container">
+    <h2> @Html.DisplayFor(model => model.Title) </h2>
+    <h3> A project by @Html.DisplayFor(model => model.OwnerUser.Email) </h3>
 </div>
+
 
 <!-- Kanban Board Section, this javascript object is an MVVM component which is linked to the datatables object below  -->
 <div class="board">
@@ -51,6 +46,15 @@
     </div>
 </div>
 <!-- -->
+
+<!-- Project Team Members Section  -->
+<div class="project-team-container">
+    <h3> Team Members <button type="button" class="btn btn-success">+</button> </h3>
+    <h5>Gary Gillespie <span class="badge badge-secondary">GG</span> Adam Murray <span class="badge badge-secondary">AM</span></h5>
+    <hr />
+</div>
+
+
 <!-- Create a new Task seciton -->
 <h3> Tasks </h3>
 <!-- old action link to projectTasks/Create view, below is the new option to post the new project task via jquery Ajax -->
@@ -97,8 +101,14 @@
         </tr>
     </thead>
 </table>
-<h4> User Contributions </h4>
+
+
 <br />
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
 
 @section muuri
 {
