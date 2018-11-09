@@ -20,7 +20,7 @@ namespace IssueTracker.Controllers
 
         public HomeController(IApplicationDbContext dbContext)
         {
-            db = new ApplicationDbContext();
+            db = dbContext;
         }
 
         [Authorize]

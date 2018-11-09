@@ -14,6 +14,11 @@ namespace IssueTracker.Models
             list = new List<T>();
         }
 
+        public List<T> ToList()
+        {
+            return this.list;
+        }
+
         public FakeDbSet(IEnumerable<T> contents)
         {
             this.list = contents.ToList();

@@ -22,7 +22,7 @@ namespace IssueTracker.Controllers
 
         public ProjectTasksController(IApplicationDbContext dbContext)
         {
-            db = new ApplicationDbContext();
+            db = dbContext;
         }
 
         // GET: ProjectTasks/Details/5
