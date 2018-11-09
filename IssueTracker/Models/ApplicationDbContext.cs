@@ -13,6 +13,7 @@ namespace IssueTracker.Models
         IDbSet<UserAccount> UserAccounts { get; set; }
         IDbSet<ProjectModels> ProjectModels { get; set; }
         IDbSet<ProjectTask> ProjectTasks { get; set; }
+        IDbSet<ApplicationUser> Users { get; set; }
         int SaveChanges();
         void Dispose();
         
@@ -52,7 +53,8 @@ namespace IssueTracker.Models
         public IDbSet<UserAccount> UserAccounts { get; set; }
         public IDbSet<ProjectModels> ProjectModels { get; set; }
         public IDbSet<ProjectTask> ProjectTasks { get; set; }
-        
+        public IDbSet<ApplicationUser> Users { get; set; }
+
         public int SaveChanges()
         { 
             return 0;

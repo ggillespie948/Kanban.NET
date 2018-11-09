@@ -37,7 +37,7 @@ namespace IssueTracker.Controllers
             {
                 return HttpNotFound();
             }
-            return View(projectTask);
+            return PartialView("_ProjectDetails", projectTask);
         }
 
         // GET: ProjectTasks/Create

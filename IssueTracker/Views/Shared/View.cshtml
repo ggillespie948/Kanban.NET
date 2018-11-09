@@ -1,0 +1,59 @@
+﻿@model IssueTracker.Models.ProjectTask
+
+<div>
+    <h4>ProjectTask</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatorId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatorId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Complexity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Complexity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BoardId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BoardId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+</p>

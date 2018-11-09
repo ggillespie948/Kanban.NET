@@ -534,13 +534,14 @@
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
-    <Content Include="Views\ProjectTasks\Create.cshtml" />
-    <Content Include="Views\ProjectTasks\Delete.cshtml" />
-    <Content Include="Views\ProjectTasks\Details.cshtml" />
-    <Content Include="Views\ProjectTasks\Edit.cshtml" />
-    <Content Include="Views\ProjectTasks\Index.cshtml" />
+    <Content Include="Views\ProjectTasks - this should be deleted soon\Create.cshtml" />
+    <Content Include="Views\ProjectTasks - this should be deleted soon\Delete.cshtml" />
+    <Content Include="Views\ProjectTasks - this should be deleted soon\Details.cshtml" />
+    <Content Include="Views\ProjectTasks - this should be deleted soon\Edit.cshtml" />
+    <Content Include="Views\ProjectTasks - this should be deleted soon\Index.cshtml" />
     <Content Include="Views\Project\ListAllAdmin.cshtml" />
     <Content Include="Views\Shared\_NewProjectTask.cshtml" />
+    <Content Include="Views\Shared\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

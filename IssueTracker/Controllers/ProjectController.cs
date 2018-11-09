@@ -112,7 +112,7 @@ namespace IssueTracker.Controllers
             //ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             projectModels.ApplicationUserId = userId;
             projectModels.OwnerUserID = userId;
-            //projectModels.OwnerUser = db.Users.Where(u => u.Id == userId).FirstOrDefault();
+            projectModels.OwnerUser = db.Users.Where(u => u.Id == userId).FirstOrDefault();
             projectModels.ProjectMembers.Add(db.UserAccounts.Where(u => u.ApplicationUserId == userId).FirstOrDefault());
 
            db.ProjectModels.Add(projectModels);
