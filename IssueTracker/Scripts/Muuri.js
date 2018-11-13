@@ -42,13 +42,10 @@ itemContainers.forEach(function (container) {
     // in case dragging the item caused some other items to
     // be different size.
 
-      console.log(" releaseeeeeeeee me");
       var colo = item.getElement();
       var str = colo.innerHTML;
-      console.log(str);
       var newStr = str.slice(0, -10);    // += '<span class="badge bg-primary" style="float:right;">GG</span>'; 
       newStr += '<span class="badge bg-primary" style="float:right;">GG</span> </div>';
-      console.log("new Str: " + newStr);
       colo.innerHTML = newStr;
 
 
@@ -81,3 +78,4 @@ boardGrid = new Muuri('.board', {
   dragReleaseDuration: 400,
   dragReleaseEasing: 'ease'
 });
+

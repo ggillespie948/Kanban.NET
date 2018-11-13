@@ -27,7 +27,7 @@
         <div class="board-column-header">In-Progress</div>
         <div class="board-column-content">
             <!-- Column 2 Project Tasks -->
-            <div class="board-item"><div class="board-item-content"> <a href="#"> Item # 1 </a>  <span class="badge bg-primary" style="float:right;">GG</span>    </div></div>
+            <div class="board-item"><div class="board-item-content"> <a href="#" class="kanbanEntry" data-id="101" id="kanbanItem"> Item # 1 ;) </a>  <span class="badge bg-primary" style="float:right;">GG</span>    </div></div>
 
 
         </div>
@@ -197,7 +197,7 @@
             item.className = 'board-item';
             inner.className = 'board-item-content';
             inner.id = Id;
-            inner.innerHTML = '<a href="#">' + Name + '</a>'; //insertID here
+            inner.innerHTML = '<a href="#" data-id="' + Id + '" id="kanbanItem" class="kanbanEntry">' + Name + '</a>'; //insertID here
             item.appendChild(inner);
 
             var counter = 0
@@ -222,7 +222,7 @@
 
 
         //Init Project Task Inspection Modal for rapidly adding project tasks
-        $('#exampleModal').on('show.bs.modal', function (event) {
+        $('#viewProjectTaskModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var recipient = button.data('whatever') // Extract info from data-* attributes
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -233,6 +233,7 @@
         })
 
         //Handle project task modal form submision
+        
         $('#projectTaskBtnSubmit').click(function () {
 
             $('#ProjectID').val(@Model.Id); // dynamically assign propject id as partial view viewdata asignment not being detected by jquery
@@ -264,6 +265,28 @@
                 }
             })
         })
+
+
+        // GET request for prjoect task details partial view
+        $('.kanbanEntry').click(function (e) {
+            e.preventDefault();
+
+            var taskId = $('#kanbanItem').data(id);
+
+            $.ajax({
+                type: "GET",
+                url: "/ProjectTasks/Details",
+                data: taskId,
+                success: function (result) {
+                    alert("Successssss fam");
+                    $('#viewProjectTaskModal').html(result);
+                    $('#viewProjectTaskModal').modal("show");
+
+                }
+            })
+
+
+        });
 
 
         
