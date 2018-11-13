@@ -101,9 +101,8 @@
             </div>
             <div class="modal-body">
 
-
-                @Html.Partial("_ViewProjectTask")
-
+                <!-- the content of this modal is dyanamically loaded via ajax -->
+                
 
             </div>
             <div class="modal-footer">
@@ -127,10 +126,7 @@
         </tr>
     </thead>
 </table>
-
-
 <br />
-
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
@@ -176,32 +172,21 @@
                 cache: false,
                 data: { "projectId": projectId  },
                 success: function (responsedata) {
-
                     //Get nested payload from json object
                     var payload = [];
                     $.each(responsedata, function (key, value) {
                         payload.push(value);
                     });
-
                     for (i = 0; i < payload[0].length; i++) {
                         var data = payload[0][i];
                         if (data.hasOwnProperty('Name')) {
                             var val = data['Name'];
                             var valkey = data['Id'];
-
-                            //console.log("pre-val-name : " + val);
-                            //console.log("pre-val-Id : " + valkey);
-
                             GenerateKanbanEntry(val, valkey, 0);
-                            
-
-
                         }
                     }
                 }
             });
-            
-
         });
 
         //Muuri Helper Funcitons
@@ -225,6 +210,18 @@
 
 
         //Init image modal for rapidly adding project tasks
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var recipient = button.data('whatever') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.modal-title').text('New message to ' + recipient)
+            modal.find('.modal-body input').val(recipient)
+        })
+
+
+        //Init Project Task Inspection Modal for rapidly adding project tasks
         $('#exampleModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var recipient = button.data('whatever') // Extract info from data-* attributes
