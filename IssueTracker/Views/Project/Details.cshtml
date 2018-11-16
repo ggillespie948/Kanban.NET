@@ -11,41 +11,44 @@
     <h3> A project by @Html.DisplayFor(model => model.OwnerUser.Email) </h3>
 </div>
 
+<!-- Root Project Kanban Board -->
+<div class="project-kanban-container">
+    <!-- Kanban Board Section, this javascript object is an MVVM component which is linked to the datatables object below  -->
+    <div class="board">
+        <div class="board-column todo">
+            <div class="board-column-header">To Do</div>
+            <div class="board-column-content">
+                <!-- Column 1 Project Tasks -->
 
-<!-- Kanban Board Section, this javascript object is an MVVM component which is linked to the datatables object below  -->
-<div class="board">
-    <div class="board-column todo">
-        <div class="board-column-header">To Do</div>
-        <div class="board-column-content">
-            <!-- Column 1 Project Tasks -->
 
-
+            </div>
+            <button type="button" class="btn btn-primary">+</button>
         </div>
-        <button type="button" class="btn btn-primary">+</button>
-    </div>
-    <div class="board-column working">
-        <div class="board-column-header">In-Progress</div>
-        <div class="board-column-content">
-            <!-- Column 2 Project Tasks -->
-            <div class="board-item"><div class="board-item-content"> <a href="#" class="kanbanEntry" data-id="101" id="kanbanItem"> Item # 1 ;) </a>  <span class="badge bg-primary" style="float:right;">GG</span>    </div></div>
+        <div class="board-column working">
+            <div class="board-column-header">In-Progress</div>
+            <div class="board-column-content">
+                <!-- Column 2 Project Tasks -->
+                <div class="board-item"><div class="board-item-content"> <a href="#" class="kanbanEntry" data-id="101" id="kanbanItem"> Item # 1 ;) </a>  <span class="badge bg-primary" style="float:right;">GG</span>    </div></div>
 
 
+            </div>
+            <button type="button" class="btn btn-warning">+</button>
         </div>
-        <button type="button" class="btn btn-warning">+</button>
-    </div>
-    <div class="board-column done">
-        <div class="board-column-header">Completed</div>
-        <div class="board-column-content">
-            <!-- Colum 3 Project Tasks -->
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>11</div></div>
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>13</div></div>
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>14</div></div>
-            <div class="board-item"><div class="board-item-content"><span>Item #</span>15</div></div>
+        <div class="board-column done">
+            <div class="board-column-header">Completed</div>
+            <div class="board-column-content">
+                <!-- Colum 3 Project Tasks -->
+                <div class="board-item"><div class="board-item-content"><span>Item #</span>11</div></div>
+                <div class="board-item"><div class="board-item-content"><span>Item #</span>13</div></div>
+                <div class="board-item"><div class="board-item-content"><span>Item #</span>14</div></div>
+                <div class="board-item"><div class="board-item-content"><span>Item #</span>15</div></div>
+            </div>
+            <button type="button" class="btn btn-success">+</button>
         </div>
-        <button type="button" class="btn btn-success">+</button>
     </div>
+    <!-- -->
 </div>
-<!-- -->
+
 
 <!-- Project Team Members Section  -->
 <div class="project-team-container">

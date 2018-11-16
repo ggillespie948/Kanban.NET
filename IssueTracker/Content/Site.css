@@ -2,12 +2,14 @@
     padding-top: 50px;
     padding-bottom: 20px;
     font-family: 'Montserrat', sans-serif;
+    background-color: #e2dcdc;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    background-color: #e2dcdc;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -98,7 +100,7 @@ select,
 
 /* Project Feed Rounded Corners */
 .corner {
-    border-top: 150px solid #222;
+    border-top: 150px solid #20204a;
     border-bottom: 100px solid transparent;
     border-right: 150px solid transparent;
     position: absolute;
@@ -107,7 +109,7 @@ select,
 }
 
 .corner-right {
-    border-top: 150px solid #222;
+    border-top: 150px solid #20204a;
     border-bottom: 100px solid transparent;
     border-left: 150px solid transparent;
     position: absolute;
@@ -125,13 +127,33 @@ select,
 
 
 .project-header-container {
-    background-color: steelblue;
+    
     color: whitesmoke;
-    font-style: oblique;
+    font-weight: bolder;
+    background-image: linear-gradient(#28285a,#14142f);
 }
 
 .project-team-container {
-    background-color: steelblue;
     color: whitesmoke;
     font-style: oblique;
+    background-image: linear-gradient(#20204a,#14142f);
+    border-bottom: 0 none;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+}
+
+.project-kanban-container {
+    background-color: white;
+    padding-top: 15px;
+    margin-top: -7px;
+    border-bottom: 0 none;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+}
+
+.navbar {
+    background-image: linear-gradient(#20204a,#14142f);
+    border-bottom: 0 none;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+}
+.thead{
+    background-color: navajowhite;
 }
