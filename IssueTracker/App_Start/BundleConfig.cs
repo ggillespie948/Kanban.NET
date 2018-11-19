@@ -29,7 +29,8 @@ namespace IssueTracker
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/Muuri.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css"
+                      ));
 
             
         }

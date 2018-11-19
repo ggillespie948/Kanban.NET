@@ -32,7 +32,6 @@
 
 
             </div>
-            <button type="button" class="btn btn-warning">+</button>
         </div>
         <div class="board-column done">
             <div class="board-column-header">Completed</div>
@@ -43,7 +42,6 @@
                 <div class="board-item"><div class="board-item-content"><span>Item #</span>14</div></div>
                 <div class="board-item"><div class="board-item-content"><span>Item #</span>15</div></div>
             </div>
-            <button type="button" class="btn btn-success">+</button>
         </div>
     </div>
     <!-- -->
@@ -63,10 +61,14 @@
 <!-- old action link to projectTasks/Create view, below is the new option to post the new project task via jquery Ajax -->
 <!-- <button type="button" class="btn btn-success" onclick="location.href=' (AT)Url.Action("Create", "ProjectTasks", new { projectId = Model.Id } )'">Add new task </button> -->
 <br />
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"> Add New Task </button>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"> Add New Task <i class="fas fa-pencil-alt"></i> </button>
 <br />
 <!--  -->
 
+<div class="animsition">
+    <a href="./page1" class="animsition-link">animsition link 1</a>
+    <a href="./page2" class="animsition-link">animsition link 2</a>
+</div>
 
 <!-- Dropdwon Modal for posting new task via ajax       !!!!THIS NEEDS TO BE A PARTIAL VIEW!!!!!      -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -148,25 +150,10 @@
         $(document).ready(function () {
             ///     INITALISE BACKLOG, KANBAN BOARD    ///
             var projectId = @Model.Id
-             
-           //Init DataTables with Product Backlog
-            $('#project_backlog_table').DataTable({
-                "ajax": {
-                    "url": "/Project/LoadProjectBacklog",
-                    "type": "GET",
-                    "datatype": "json",
-                    "data" : { "projectId": projectId }
-                },
-                "columns": [
-                    { "data": "Id", "autoWidth": true },
-                    { "data": "Name", "autoWidth": true },
-                    { "data": "Description", "autoWidth": true },
-                    { "data": "Complexity", "autoWidth": true },
-                    {
-                        "defaultContent" : "<button type=\"button\" class=\"btn btn-success btn-sm btn-space\">Add</button><button type=\"button\" class= \"btn btn-warning btn-sm btn-space\" > Remove</button><button type=\"button\" class=\"btn btn-danger btn-sm btn-space\">Delete</button><button type=\"button\" class=\"btn btn-primary btn-sm btn-space\">Vote Complexity</button>" 
-                    }
-                ]
-                });
+
+
+             GETProductBacklog();
+                
 
             //Init Muuri Grid with Task Objects
             $.ajax({
@@ -190,7 +177,46 @@
                     }
                 }
             });
+            
         });
+
+        function GETProductBacklog() {
+            var projectId = @Model.Id
+
+            //Init DataTables with Product Backlog
+            $('#project_backlog_table').DataTable({
+                "ajax": {
+                    "url": "/Project/LoadProjectBacklog",
+                    "type": "GET",
+                    "datatype": "json",
+                    "data": { "projectId": projectId }
+                },
+                "columns": [
+                    { "data": "Id", "autoWidth": true },
+                    { "data": "Name", "autoWidth": true },
+                    { "data": "Description", "autoWidth": true },
+                    { "data": "Complexity", "autoWidth": true },
+                    {
+                        "defaultContent": "<button type=\"button\" class=\"btn btn-success btn-sm btn-space\"><i class=\"fas fa-pencil-alt\"></i></button>"
+                    }
+                ]
+                });
+
+            SetProductBacklogReload();
+
+        }
+
+        function SetProductBacklogReload() {
+
+            
+            var table = $('#project_backlog_table').DataTable({
+                ajax: "data.json"
+            });
+
+            setInterval(function () {
+                table.ajax.reload();
+            }, 10000);
+        }
 
         //Muuri Helper Funcitons
         function GenerateKanbanEntry(Name, Id, BoardId) {
@@ -251,16 +277,9 @@
                 data: projectTaskFormData,
                 success: function () {
                    
-
                     GenerateKanbanEntry($('#Name').val(), 9, 0);
 
-                    var tbl = $('#project_backlog_table').DataTable();
-                    tbl.row.add([
-                        99,
-                        $('#Name').val(),
-                        $('#Description').val(),
-                        $('#Complexity').val(),
-                    ]).draw(false);
+                    GETProductBacklog();
 
                     $('#loaderDiv').hide();
                     $('#exampleModal').modal("hide");
