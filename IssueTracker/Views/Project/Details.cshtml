@@ -54,19 +54,12 @@
 
 <!-- Create a new Task seciton -->
 <h3> Tasks </h3>
-<!-- old action link to projectTasks/Create view, below is the new option to post the new project task via jquery Ajax -->
 <!-- <button type="button" class="btn btn-success" onclick="location.href=' (AT)Url.Action("Create", "ProjectTasks", new { projectId = Model.Id } )'">Add new task </button> -->
 <br />
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#newTaskModal"> Add New Task <i class="fas fa-pencil-alt"></i> </button>
 <br />
-<!--  -->
 
-<div class="animsition">
-    <a href="./page1" class="animsition-link">animsition link 1</a>
-    <a href="./page2" class="animsition-link">animsition link 2</a>
-</div>
-
-<!-- Dropdwon Modal for posting new task via ajax       !!!!THIS NEEDS TO BE A PARTIAL VIEW!!!!!      -->
+<!-- Dropdwon Modal for posting new task via ajax      -->
 <div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -89,7 +82,11 @@
     </div>
 </div>
 <!-- -->
-<!-- Dropdown Modal for VIEWING kanban items -->
+
+
+
+
+<!-- Dropdown Modal for viewing project task details -->
 <div class="modal fade" id="viewProjectTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -296,13 +293,17 @@
                 }
             })
         });
-               
+
 
         //Clear loader modal of data previously contained
-        $('#viewProjectTaskModal').on('hidden.bs.modal'), function (e) {
-            alert('clearing html');
-            $('.modal-body').html("");
-        }
+        $('#viewProjectTaskModal').on('hidden.bs.modal', function (e) {
+            $('#viewProjectTaskModal').trigger("reset");
+        });
+        
+        //Clear new task model when closing
+        $('#newTaskModal').on('hidden.bs.modal', function (e) {
+            $('#newTaskModal').trigger("reset");
+        });
 
     </script>
 
