@@ -196,7 +196,9 @@ namespace IssueTracker.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var data = db.ProjectTasks.Where(pt => pt.ProjectID == projectId);
+            var res = data.ToString();
             return Json(new { data }, JsonRequestBehavior.AllowGet);
         }
 

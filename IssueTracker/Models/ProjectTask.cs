@@ -42,8 +42,5 @@ namespace IssueTracker.Models
         public ICollection<ApplicationUser> Members { get; set; }
 
         
-
-
-        
     }
 }

@@ -32,7 +32,20 @@ namespace IssueTracker
                       "~/Content/site.css"
                       ));
 
-            
+            //Table Responsive Collections
+            bundles.Add(new ScriptBundle("~/bundles/tableResponsiveJS").Include(
+                      "~/Scripts/select2.min.js",
+                      "~/Scripts/tbl_res_main.js",
+                      "~/Scripts/perfect-scrollbar.min.js"
+                      ));
+
+            bundles.Add(new StyleBundle("~/Content/tableResponsiveCSS").Include(
+                      "~/Content/animate/animate.css",
+                      "~/Content/tbl_res_main.css",
+                      "~/Content/tbh_res_util.css"
+                      ));
+
+
         }
     }
 }

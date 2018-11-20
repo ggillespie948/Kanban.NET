@@ -145,6 +145,7 @@ table td, table th {
 table thead tr {
   height: 60px;
   background: #36304a;
+  color: white;
 }
 table tbody tr {
   height: 50px;

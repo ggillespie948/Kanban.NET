@@ -145,7 +145,6 @@
             var projectId = @Model.Id
 
                 // Initialise Datatables with Product Backlog
-            GETProductBacklog();
             /// Initialise Muuri.Js Main Kanban Board With All Backlog Items
             $.ajax({
                 url: "/Project/LoadProjectTasks",
@@ -167,7 +166,9 @@
                         }
                     }
                 }
-            });
+                });
+
+            GETProductBacklog();
         });
 
         function GETProductBacklog() {

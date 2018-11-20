@@ -207,15 +207,7 @@
     <Compile Include="Migrations\201811030000006_InitialCreate.Designer.cs">
       <DependentUpon>201811030000006_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811051348293_05\11Miogration.cs" />
-    <Compile Include="Migrations\201811052237453_UpdatedModelUserT.cs" />
-    <Compile Include="Migrations\201811052237453_UpdatedModelUserT.Designer.cs">
-      <DependentUpon>201811052237453_UpdatedModelUserT.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811052243579_UpdatedModelUserUUT.cs" />
-    <Compile Include="Migrations\201811052243579_UpdatedModelUserUUT.Designer.cs">
-      <DependentUpon>201811052243579_UpdatedModelUserUUT.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\11Migration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -231,6 +223,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate\animate.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -395,6 +388,8 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Muuri.css" />
+    <Content Include="Content\perfect-scrollbar.css" />
+    <Content Include="Content\select2.min.css" />
     <Content Include="Content\tbl_res_main.css" />
     <Content Include="Content\tbl_res_util.css" />
     <Content Include="favicon.ico" />
@@ -517,6 +512,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Muuri.js" />
+    <Content Include="Scripts\perfect-scrollbar.min.js" />
+    <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\tbl_res_main.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -568,6 +565,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\201811051348293_05\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -585,12 +583,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811030000006_InitialCreate.resx">
       <DependentUpon>201811030000006_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811052237453_UpdatedModelUserT.resx">
-      <DependentUpon>201811052237453_UpdatedModelUserT.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811052243579_UpdatedModelUserUUT.resx">
-      <DependentUpon>201811052243579_UpdatedModelUserUUT.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

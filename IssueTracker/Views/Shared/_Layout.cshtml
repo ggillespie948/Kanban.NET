@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/tableResponsiveCSS")
     @Scripts.Render("~/bundles/modernizr")
     <!-- Datatables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
@@ -57,9 +58,10 @@
     @Scripts.Render("~/bundles/jquery")
     <!-- Bootstrap 4 -->
     @Scripts.Render("~/bundles/bootstrap")
-    <!-- Scripts Section -->
+
+    <!-- Optional Dependency Sections -->
+    @RenderSection("responsiveTable", required:false)
     @RenderSection("scripts", required: false)
-    <!-- Muuri JS Initialisation & Helper Functions -->
     @RenderSection("muuri", required: false)
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 </body>
