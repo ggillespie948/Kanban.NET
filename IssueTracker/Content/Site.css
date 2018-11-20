@@ -157,3 +157,7 @@ select,
 .thead{
     background-color: navajowhite;
 }
+
+.modal-header {
+    background-image: linear-gradient(#20204a,#14142f)!important;
+}

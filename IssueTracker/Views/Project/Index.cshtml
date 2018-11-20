@@ -29,19 +29,19 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td class="column1">
             @Html.DisplayFor(modelItem => item.OwnerUser.Email)
         </td>
-        <td>
+        <td class="column2">
             @Html.DisplayFor(modelItem => item.Title)
         </td>
-        <td>
+        <td class="column3">
             @Html.DisplayFor(modelItem => item.Description)
         </td>
-        <td>
+        <td class="column4">
             @Html.DisplayFor(modelItem => item.ApplicationUserId)
         </td>
-        <td>
+        <td class="column5">
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.Id })

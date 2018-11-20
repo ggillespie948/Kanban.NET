@@ -26,7 +26,7 @@
             <div class="board-column-header">In-Progress</div>
             <div class="board-column-content">
                 <!-- Column 2 Project Tasks -->
-                <div class="board-item"><div class="board-item-content"> <a href="#" class="kanbanEntry" data-id="101" id="kanbanItem"> Item # 1 ;) </a>  <span class="badge bg-primary" style="float:right;">GG</span>    </div></div>
+                <div class="board-item"><div class="board-item-content"> <a href="#" data-id="101"> Item # 1 ;) </a>  <span class="badge bg-primary" style="float:right;">GG</span>    </div></div>
             </div>
         </div>
         <div class="board-column done">
@@ -79,7 +79,7 @@
 
                 <!-- Render NewProjectTask partial View -->
                 @Html.Partial("_NewProjectTask", new IssueTracker.Models.ProjectTask(), new ViewDataDictionary { { "ProjectId", Model.Id }, { "ProjectMembers", Model.ProjectMembers }, { "CreatorId", ViewBag.UserId } })
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -89,8 +89,6 @@
     </div>
 </div>
 <!-- -->
-
-
 <!-- Dropdown Modal for VIEWING kanban items -->
 <div class="modal fade" id="viewProjectTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -100,15 +98,14 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="loader-modal-body">
 
                 <!-- the content of this modal is dyanamically loaded via ajax -->
-                
+
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" id="projectTaskBtnSubmit">Add Task</button>
             </div>
         </div>
     </div>
@@ -133,6 +130,9 @@
     @Html.ActionLink("Back to List", "Index")
 </p>
 
+<div class="kanbanEntry">
+    <a id="anchorId"> TEST LINK! </a>
+</div>
 @section muuri
 {
     <p> Muuri time </p>
@@ -140,17 +140,19 @@
     <script src="https://unpkg.com/web-animations-js@2.3.1/web-animations.min.js"></script>
     <script src="https://unpkg.com/muuri@0.7.1/dist/muuri.min.js"></script>
 
-    @Scripts.Render("~/bundles/muuri")  <!-- Render Muuri JS File initializer -->
+    <!-- Render Muuri JS File initializer -->
+    @Scripts.Render("~/bundles/muuri")
 
     <script>
         $(document).ready(function () {
+
             ///     INITALISE BACKLOG    ///
             var projectId = @Model.Id
 
+            // Initialise Datatables with Product Backlog
             GETProductBacklog();
 
-            /// Initialise Muuri.Js Main Kanban Board
-            //Init Grid with Task Objects
+            /// Initialise Muuri.Js Main Kanban Board With All Backlog Items
             $.ajax({
                 url: "/Project/LoadProjectTasks",
                 type: "GET",
@@ -171,7 +173,7 @@
                         }
                     }
                 }
-                });
+            });
 
 
             
@@ -206,23 +208,22 @@
 
         /// Function which periodically reloads datatables data
         function SetProductBacklogReload() {
-            var table = $('#project_backlog_table').DataTable({
-                ajax: "data.json"
-            });
 
-            setInterval(function () {
-                table.ajax.reload();
-            }, 10000);
+            //var table = $('#project_backlog_table').DataTable;
+
+            //setInterval(function () {
+            //    table.ajax.reload();
+            //}, 10000);
         }
 
-        //Muuri Helper Funcitons - Generates new kanban board entry 
+        //Muuri Helper Funcitons - Generates new kanban board entry
         function GenerateKanbanEntry(Name, Id, BoardId) {
             var item = document.createElement('div');
             var inner = document.createElement('div');
             item.className = 'board-item';
             inner.className = 'board-item-content';
             inner.id = Id;
-            inner.innerHTML = '<a href="#" data-id="' + Id + '" class="kanbanEntry">' + Name + '</a>'; //insertID here
+            inner.innerHTML = '<a href="#" data-id="' + Id + '">' + Name + '</a>'; //insertID here
             item.appendChild(inner);
 
             var counter = 0
@@ -234,7 +235,16 @@
         }
 
 
-        //Init image modal for rapidly adding project tasks
+
+
+
+
+
+        ///
+        /// Image Modal Ajax Request Helper Functions
+        ///
+
+        //Init image modal for rapidly adding new project tasks
         $('#newTaskModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -243,19 +253,29 @@
             var modal = $(this)
             modal.find('.modal-title').text('New message to ' + recipient)
             modal.find('.modal-body input').val(recipient)
-        })
-
-
+        });
+        
         //Init Project Task Inspection Modal for rapidly adding project tasks
         $('#viewProjectTaskModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var recipient = button.data('whatever') // Extract info from data-* attributes
+            //var button = $(event.relatedTarget) // Button that triggered the modal
+            //var recipient = button.data('whatever') // Extract info from data-* attributes
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-            var modal = $(this)
-            modal.find('.modal-title').text('New message to ' + recipient)
-            modal.find('.modal-body input').val(recipient)
-        })
+            //var modal = $(this)
+            //modal.find('.modal-title').text('New message to ' + recipient)
+            //modal.find('.modal-body input').val(recipient)
+        });
+
+        // GET request for prjoect task details partial view
+        $(document).on('click', '.board-item-content a',  function (event) {
+            event.preventDefault();
+            var taskId = $(event.target).data('id');
+                $.get("@Url.Action("Details","ProjectTasks")/" + taskId,
+                    function (data) { //callback
+                        $('#loader-modal-body').html(data);
+                    })
+                $('#viewProjectTaskModal').modal("show");
+            }); 
 
         //Handle project task modal form submision
         $('#projectTaskBtnSubmit').click(function () {
@@ -275,24 +295,14 @@
 
                 }
             })
-        })
-
-
-        // GET request for prjoect task details partial view
-        $('.kanbanEntry').click(function (e) {
-            e.preventDefault();
-            var taskId = $('#kanbanItem').data(id);
-            $.ajax({
-                type: "GET",
-                url: "/ProjectTasks/Details",
-                data: taskId,
-                success: function (result) {
-                    alert("Successssss fam");
-                    $('#viewProjectTaskModal').html(result);
-                    $('#viewProjectTaskModal').modal("show");
-                }
-            })
         });
+               
+
+        //Clear loader modal of data previously contained
+        $('#viewProjectTaskModal').on('hidden.bs.modal'), function (e) {
+            alert('clearing html');
+            $('.modal-body').html("");
+        }
 
     </script>
 

@@ -60,7 +60,8 @@ namespace IssueTracker.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ProjectModels projectModels = db.ProjectModels.Find(id);
             if (projectModels == null)

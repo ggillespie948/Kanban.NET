@@ -395,6 +395,8 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Muuri.css" />
+    <Content Include="Content\tbl_res_main.css" />
+    <Content Include="Content\tbl_res_util.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -413,6 +415,17 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\OpenSans\OpenSans-Bold.ttf" />
+    <Content Include="fonts\OpenSans\OpenSans-BoldItalic.ttf" />
+    <Content Include="fonts\OpenSans\OpenSans-ExtraBold.ttf" />
+    <Content Include="fonts\OpenSans\OpenSans-ExtraBoldItalic.ttf" />
+    <Content Include="fonts\OpenSans\OpenSans-Italic.ttf" />
+    <Content Include="fonts\OpenSans\OpenSans-Light.ttf" />
+    <Content Include="fonts\OpenSans\OpenSans-LightItalic.ttf" />
+    <Content Include="fonts\OpenSans\OpenSans-Regular.otf" />
+    <Content Include="fonts\OpenSans\OpenSans-Regular.ttf" />
+    <Content Include="fonts\OpenSans\OpenSans-SemiBold.ttf" />
+    <Content Include="fonts\OpenSans\OpenSans-SemiBoldItalic.ttf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\DatatablesInit.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -504,6 +517,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Muuri.js" />
+    <Content Include="Scripts\tbl_res_main.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -543,11 +557,11 @@
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\Edit.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
-    <Content Include="Views\ProjectTasks - this should be deleted soon\Create.cshtml" />
-    <Content Include="Views\ProjectTasks - this should be deleted soon\Delete.cshtml" />
-    <Content Include="Views\ProjectTasks - this should be deleted soon\Details.cshtml" />
-    <Content Include="Views\ProjectTasks - this should be deleted soon\Edit.cshtml" />
-    <Content Include="Views\ProjectTasks - this should be deleted soon\Index.cshtml" />
+    <Content Include="Views\ProjectTasks\Create.cshtml" />
+    <Content Include="Views\ProjectTasks\Delete.cshtml" />
+    <Content Include="Views\ProjectTasks\Details.cshtml" />
+    <Content Include="Views\ProjectTasks\Edit.cshtml" />
+    <Content Include="Views\ProjectTasks\Index.cshtml" />
     <Content Include="Views\Project\ListAllAdmin.cshtml" />
     <Content Include="Views\Shared\_NewProjectTask.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
