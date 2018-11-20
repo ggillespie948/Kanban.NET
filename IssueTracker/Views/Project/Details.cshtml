@@ -19,8 +19,6 @@
             <div class="board-column-header">To Do</div>
             <div class="board-column-content">
                 <!-- Column 1 Project Tasks -->
-
-
             </div>
             <button type="button" class="btn btn-primary">+</button>
         </div>
@@ -29,8 +27,6 @@
             <div class="board-column-content">
                 <!-- Column 2 Project Tasks -->
                 <div class="board-item"><div class="board-item-content"> <a href="#" class="kanbanEntry" data-id="101" id="kanbanItem"> Item # 1 ;) </a>  <span class="badge bg-primary" style="float:right;">GG</span>    </div></div>
-
-
             </div>
         </div>
         <div class="board-column done">
@@ -61,7 +57,7 @@
 <!-- old action link to projectTasks/Create view, below is the new option to post the new project task via jquery Ajax -->
 <!-- <button type="button" class="btn btn-success" onclick="location.href=' (AT)Url.Action("Create", "ProjectTasks", new { projectId = Model.Id } )'">Add new task </button> -->
 <br />
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal"> Add New Task <i class="fas fa-pencil-alt"></i> </button>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#newTaskModal"> Add New Task <i class="fas fa-pencil-alt"></i> </button>
 <br />
 <!--  -->
 
@@ -71,7 +67,7 @@
 </div>
 
 <!-- Dropdwon Modal for posting new task via ajax       !!!!THIS NEEDS TO BE A PARTIAL VIEW!!!!!      -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="newTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -96,7 +92,7 @@
 
 
 <!-- Dropdown Modal for VIEWING kanban items -->
-<div class="modal fade" id="viewProjectTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="viewProjectTaskModal" tabindex="-1" role="dialog" aria-labelledby="newTaskModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -148,14 +144,13 @@
 
     <script>
         $(document).ready(function () {
-            ///     INITALISE BACKLOG, KANBAN BOARD    ///
+            ///     INITALISE BACKLOG    ///
             var projectId = @Model.Id
 
+            GETProductBacklog();
 
-             GETProductBacklog();
-                
-
-            //Init Muuri Grid with Task Objects
+            /// Initialise Muuri.Js Main Kanban Board
+            //Init Grid with Task Objects
             $.ajax({
                 url: "/Project/LoadProjectTasks",
                 type: "GET",
@@ -176,7 +171,10 @@
                         }
                     }
                 }
-            });
+                });
+
+
+            
             
         });
 
@@ -206,9 +204,8 @@
 
         }
 
+        /// Function which periodically reloads datatables data
         function SetProductBacklogReload() {
-
-            
             var table = $('#project_backlog_table').DataTable({
                 ajax: "data.json"
             });
@@ -218,9 +215,8 @@
             }, 10000);
         }
 
-        //Muuri Helper Funcitons
+        //Muuri Helper Funcitons - Generates new kanban board entry 
         function GenerateKanbanEntry(Name, Id, BoardId) {
-
             var item = document.createElement('div');
             var inner = document.createElement('div');
             item.className = 'board-item';
@@ -239,7 +235,7 @@
 
 
         //Init image modal for rapidly adding project tasks
-        $('#exampleModal').on('show.bs.modal', function (event) {
+        $('#newTaskModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var recipient = button.data('whatever') // Extract info from data-* attributes
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
@@ -262,27 +258,20 @@
         })
 
         //Handle project task modal form submision
-        
         $('#projectTaskBtnSubmit').click(function () {
-
             $('#ProjectID').val(@Model.Id); // dynamically assign propject id as partial view viewdata asignment not being detected by jquery
             alert($('#projectTaskModalForm').serialize());
             $('#loaderDiv').show();
-
             var projectTaskFormData = $('#projectTaskModalForm').serialize();
-
             $.ajax({
                 type: "POST",
                 url: "/ProjectTasks/Create",
                 data: projectTaskFormData,
                 success: function () {
-                   
                     GenerateKanbanEntry($('#Name').val(), 9, 0);
-
-                    GETProductBacklog();
-
+                    //GETProductBacklog();
                     $('#loaderDiv').hide();
-                    $('#exampleModal').modal("hide");
+                    $('#newTaskModal').modal("hide");
 
                 }
             })
@@ -292,9 +281,7 @@
         // GET request for prjoect task details partial view
         $('.kanbanEntry').click(function (e) {
             e.preventDefault();
-
             var taskId = $('#kanbanItem').data(id);
-
             $.ajax({
                 type: "GET",
                 url: "/ProjectTasks/Details",
@@ -303,19 +290,16 @@
                     alert("Successssss fam");
                     $('#viewProjectTaskModal').html(result);
                     $('#viewProjectTaskModal').modal("show");
-
                 }
             })
-
-
         });
 
-
-        
     </script>
 
 }
 
 @section scripts {
+    <!-- Muuri Initialisation & Helper Functions -->
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <!-- Datatables Initialisation & Helper Functions -->
 }
