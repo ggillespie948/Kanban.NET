@@ -142,13 +142,10 @@
 
     <script>
         $(document).ready(function () {
-
-            ///     INITALISE BACKLOG    ///
             var projectId = @Model.Id
 
-            // Initialise Datatables with Product Backlog
+                // Initialise Datatables with Product Backlog
             GETProductBacklog();
-
             /// Initialise Muuri.Js Main Kanban Board With All Backlog Items
             $.ajax({
                 url: "/Project/LoadProjectTasks",
@@ -171,15 +168,10 @@
                     }
                 }
             });
-
-
-            
-            
         });
 
         function GETProductBacklog() {
             var projectId = @Model.Id
-
             //Init DataTables with Product Backlog
             $('#project_backlog_table').DataTable({
                 "ajax": {
@@ -198,19 +190,6 @@
                     }
                 ]
                 });
-
-            SetProductBacklogReload();
-
-        }
-
-        /// Function which periodically reloads datatables data
-        function SetProductBacklogReload() {
-
-            //var table = $('#project_backlog_table').DataTable;
-
-            //setInterval(function () {
-            //    table.ajax.reload();
-            //}, 10000);
         }
 
         //Muuri Helper Funcitons - Generates new kanban board entry
@@ -231,15 +210,7 @@
             });
         }
 
-
-
-
-
-
-
-        ///
         /// Image Modal Ajax Request Helper Functions
-        ///
 
         //Init image modal for rapidly adding new project tasks
         $('#newTaskModal').on('show.bs.modal', function (event) {
@@ -294,7 +265,6 @@
             })
         });
 
-
         //Clear loader modal of data previously contained
         $('#viewProjectTaskModal').on('hidden.bs.modal', function (e) {
             $('#viewProjectTaskModal').trigger("reset");
@@ -306,7 +276,6 @@
         });
 
     </script>
-
 }
 
 @section scripts {
